@@ -20,7 +20,7 @@ var seckill = {
 	handleSeckill : function(seckillId, node) {
 		// 获取秒杀地址，控制显示逻辑，执行秒杀
 		node.hide().html('<button class="btn btn-primary btn-lg" id="killBtn">开始秒杀</button>');
-		console.log('exposerUrl=' + seckill.URL.exposer(seckillId));//TODO
+		console.log('exposerUrl=' + seckill.URL.exposer(seckillId));
 		$.post(seckill.URL.exposer(seckillId), {}, function(result) {
 			// 在回调函数中，执行交互流程
 			if (result && result['success']) {

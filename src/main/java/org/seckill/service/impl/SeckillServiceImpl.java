@@ -41,26 +41,20 @@ public class SeckillServiceImpl implements SeckillService {
 	@Autowired
 	private RedisDao redisDao;
 
-	// md5盐值字符串，用于混淆MD5
-	private final String slat = "skdfjksjdf7787%^%^%^FSKJFK*(&&%^%&^8DF8^%^^*7hFJDHFJ";
-
-	@Override
 	public List<Seckill> getSeckillList() {
 		return seckillDao.queryAll(0, 4);
 	}
 
-	@Override
 	public Seckill getById(long seckillId) {
 		return seckillDao.queryById(seckillId);
 	}
 
 	private String getMD5(long seckillId) {
+		String slat = "skdfjksjdf7787%^%^%^FSKJFK*(&&%^%&^8DF8^%^^*7hFJDHFJ";
 		String base = seckillId + "/" + slat;
-		String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
-		return md5;
+		return DigestUtils.md5DigestAsHex(base.getBytes());
 	}
 
-	@Override
 	public Exposer exportSeckillUrl(long seckillId) {
 		// 优化点：缓存优化：超时的基础上维护一致性
 		// 1.访问redis
@@ -75,9 +69,6 @@ public class SeckillServiceImpl implements SeckillService {
 				redisDao.putSeckill(seckill);
 			}
 		}
-		if (seckill == null) {
-			return new Exposer(false, seckillId);
-		}
 		Date startTime = seckill.getStartTime();
 		Date endTime = seckill.getEndTime();
 		// 系统当前时间
@@ -90,15 +81,14 @@ public class SeckillServiceImpl implements SeckillService {
 		return new Exposer(true, md5, seckillId);
 	}
 
-	@Override
 	@Transactional
-	/**
-	 * 使用注解控制事务方法的优点： 1.开发团队达成一致约定，明确标注事务方法的编程风格
-	 * 2.保证事务方法的执行时间尽可能短，不要穿插其他网络操作，RPC/HTTP请求或者剥离到事务方法外部
-	 * 3.不是所有的方法都需要事务，如只有一条修改操作，只读操作不需要事务控制
+	/*
+	  使用注解控制事务方法的优点： 1.开发团队达成一致约定，明确标注事务方法的编程风格
+	  2.保证事务方法的执行时间尽可能短，不要穿插其他网络操作，RPC/HTTP请求或者剥离到事务方法外部
+	  3.不是所有的方法都需要事务，如只有一条修改操作，只读操作不需要事务控制
 	 */
 	public SeckillExecution executeSeckill(long seckillId, long userPhone, String md5)
-			throws SeckillException, RepeatKillException, SeckillCloseException {
+			throws SeckillException {
 		if (md5 == null || !md5.equals(getMD5(seckillId))) {
 			throw new SeckillException("seckill data rewrite");
 		}
@@ -134,7 +124,6 @@ public class SeckillServiceImpl implements SeckillService {
 		}
 	}
 
-	@Override
 	public SeckillExecution executeSeckillProcedure(long seckillId, long userPhone, String md5) {
 		if (md5 == null || !md5.equals(getMD5(seckillId))) {
 			return new SeckillExecution(seckillId, SeckillStateEnum.DATA_REWRITE);

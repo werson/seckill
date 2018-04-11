@@ -18,22 +18,19 @@ public interface SeckillService {
 
 	/**
 	 * 查询所有秒杀记录
-	 * 
-	 * @return
+	 * @return 秒杀结果集
 	 */
 	List<Seckill> getSeckillList();
 
 	/**
 	 * 查询单个秒杀记录
-	 * 
-	 * @param seckillId
-	 * @return
+	 * @param seckillId 秒杀ID
+	 * @return 秒杀记录
 	 */
 	Seckill getById(long seckillId);
 
 	/**
 	 * 秒杀开启时输出秒杀接口地址，否则输出系统时间和秒杀时间
-	 * 
 	 * @param seckillId
 	 * @return
 	 */
@@ -41,7 +38,6 @@ public interface SeckillService {
 
 	/**
 	 * 执行秒杀操作
-	 * 
 	 * @param seckillId
 	 * @param userPhone
 	 * @param md5
@@ -55,7 +51,6 @@ public interface SeckillService {
 
 	/**
 	 * 执行秒杀操作by存储过程
-	 * 
 	 * @param seckillId
 	 * @param userPhone
 	 * @param md5
