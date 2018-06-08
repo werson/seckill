@@ -23,11 +23,25 @@ public interface SeckillDao {
 	int reduceNumber(@Param("seckillId") long seckillId, @Param("killTime") Date killTime);
 
 	/**
+	 * 修改秒杀商品
+	 * @param seckill 新的商品信息
+	 * @return 修改记录数
+	 */
+	int updateSeckill(Seckill seckill);
+
+	/**
 	 * 根据id查询秒杀对象
 	 * @param seckillId id
 	 * @return 查询结果
 	 */
 	Seckill queryById(long seckillId);
+
+	/**
+	 * 根据库存数量查询
+	 * @param number 数量
+	 * @return 查询结果
+	 */
+	Seckill queryByNumber(@Param("number") int number);
 
 	/**
 	 * 根据偏移量查询秒杀商品列表

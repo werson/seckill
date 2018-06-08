@@ -39,6 +39,25 @@ public class SeckillController {
         return "list";
     }
 
+    @RequestMapping(value = "/{number}/number", method = RequestMethod.GET)
+    @ResponseBody
+    public String numberDetail(@PathVariable("number") Integer number){
+        return seckillService.getByNumber(number).toString();
+        //return "hello world!";
+    }
+
+    @RequestMapping(value = "/{seckillId}/update", method = RequestMethod.GET)
+    @ResponseBody
+    public String update(@PathVariable("seckillId") Long seckillId){
+        if(seckillId == null){
+            return "Not Found.";
+        }
+        Seckill seckill = seckillService.getById(seckillId);
+        seckill.setName("2000元秒杀小米8");
+        //seckill.setEndTime(new Date());
+        return "结果" + seckillService.updateSeckill(seckill);
+    }
+
     @RequestMapping(value = "/{seckillId}/detail", method = RequestMethod.GET)
     public String detail(@PathVariable("seckillId") Long seckillId, Model model) {
         if (seckillId == null) {

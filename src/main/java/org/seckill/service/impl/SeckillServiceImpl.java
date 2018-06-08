@@ -41,12 +41,20 @@ public class SeckillServiceImpl implements SeckillService {
 	@Autowired
 	private RedisDao redisDao;
 
+	public int updateSeckill(Seckill seckill) {
+		return seckillDao.updateSeckill(seckill);
+	}
+
 	public List<Seckill> getSeckillList() {
 		return seckillDao.queryAll(0, 4);
 	}
 
 	public Seckill getById(long seckillId) {
 		return seckillDao.queryById(seckillId);
+	}
+
+	public Seckill getByNumber(int number) {
+		return seckillDao.queryByNumber(number);
 	}
 
 	private String getMD5(long seckillId) {

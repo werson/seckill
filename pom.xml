@@ -8,6 +8,13 @@
 	<name>seckill Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+		<!-- 百度API -->
+		<dependency>
+			<groupId>com.baidu.aip</groupId>
+			<artifactId>java-sdk</artifactId>
+			<version>4.3.2</version>
+		</dependency>
+
 		<!-- 单元测试 -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -141,5 +148,15 @@
 	</dependencies>
 	<build>
 		<finalName>seckill</finalName>
-	</build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading text-center">
-				<h2>秒杀列表</h2>
+				<h2><a href="http://www.baidu.com">秒杀列表1</a></h2>
 			</div>
 			<div class="panel-body">
 				<table class="table table-hover">
@@ -42,7 +42,7 @@
 									<fmt:formatDate value="${sk.createTime}" pattern="yyy-MM-dd HH:mm:ss"/>
 								</td>
 								<td>
-									<a class="btn btn-info" href="${basePath}seckill/${sk.seckillId}/detail" target="_blank">link</a>
+									<a class="btn btn-info" href="${basePath}seckill/${sk.seckillId}/detail" target="_self">link</a>
 								</td>
 							</tr>
 						</c:forEach>
@@ -51,10 +51,26 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入
+	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>-->
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+	<input type="text" id="isCache" style="border: white"/>
 </body>
+<script type="application/javascript">
+    /*var input = $("#isCache");
+    if (input.val() === "") {
+        console.log("新");
+    } else {
+        console.log("返回");
+    }
+    input.val(" ");*/
+    var input = document.getElementById("isCache");
+    if (input.value === "") {
+        console.log("新");
+    } else {
+        console.log("返回");
+    }
+    input.value = " ";
+</script>
 </html>

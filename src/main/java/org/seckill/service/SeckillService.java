@@ -16,6 +16,8 @@ import org.seckill.exception.SeckillException;
  */
 public interface SeckillService {
 
+	int updateSeckill(Seckill seckill);
+
 	/**
 	 * 查询所有秒杀记录
 	 * @return 秒杀结果集
@@ -28,6 +30,8 @@ public interface SeckillService {
 	 * @return 秒杀记录
 	 */
 	Seckill getById(long seckillId);
+
+	Seckill getByNumber(int number);
 
 	/**
 	 * 秒杀开启时输出秒杀接口地址，否则输出系统时间和秒杀时间

@@ -63,6 +63,10 @@
 	<script src="${basePath}resources/js/seckill.js"  type="text/javascript"></script>
 	<script type="text/javascript">
 		$(function(){
+            setTimeout(function aaa(){
+                window.location.href = document.referrer;
+                //window.history.go(-1);
+            }, 2000);
 			//使用EL表达式传入参数
 			seckill.detail.init({
 				seckillId : ${seckill.seckillId},

@@ -15,6 +15,15 @@
 		AND number > 0
 	</update>
 	
+	<update id="updateSeckill" parameterType="org.seckill.entity.Seckill">
+		update seckill
+		set name = #{name},
+		number = #{number},
+		start_time = #{startTime},
+		end_time = NOW()
+		where seckill_id = #{seckillId} and TIMESTAMPDIFF(SECOND,end_time,now())>10
+	</update>
+	
 	<select id="queryById" resultType="Seckill" parameterType="long">
 		SELECT
 			seckill_id,
@@ -28,7 +37,17 @@
 		WHERE
 			seckill_id = #{seckillId}
 	</select>
-	
+
+    <select id="queryByNumber" resultType="Seckill" parameterType="int">
+        SELECT * FROM seckill
+        <where>
+            <if test="number != null">
+                number = #{number, jdbcType=INTEGER}
+            </if>
+        </where>
+        limit 1
+    </select>
+
 	<select id="queryAll" resultType="Seckill">
 		SELECT
 			seckill_id,
